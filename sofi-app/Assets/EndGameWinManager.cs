@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class EndTrigger : MonoBehaviour
+public class EndGameWinManager : MonoBehaviour
 {
     public GameManager gameManager;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name == "Sofi")
+        if (other.CompareTag("Player"))
         {
             gameManager.WinGame();
         }

@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 
-public class CoinManager : MonoBehaviour
+public class EndGameLossManager : MonoBehaviour
 {
     public GameManager gameManager;
-    public GameObject coinObject;
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            coinObject.SetActive(false);
-            gameManager.IncrementScore();
+            gameManager.LoseGame("Se cayó al agua y la comió un pescado ...");
         }
     }
+
 }

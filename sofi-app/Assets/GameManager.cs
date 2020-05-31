@@ -1,41 +1,45 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     // score
-    public Text Score_UIText;
+    public TextMeshProUGUI Score_UIText;
     public int score;
+    // audio
+    public AudioSource backgroundAudioSource;
     // end
     bool gameHasEnded = false;
-    public float restartDelay = 3f;
-    public GameObject endPanel;
-
+    public GameObject winPanel;
+    public GameObject losePanel;
 
     public void WinGame()
     {
-        Debug.Log("WIN WIN WIN");
-        endPanel.SetActive(true);
+        Debug.Log("GAME WON");
+        backgroundAudioSource.Stop();
+        winPanel.SetActive(true);
     }
 
-    public void LoseGame()
+    public void LoseGame(string reason)
     {
         if (!gameHasEnded)
         {
+            backgroundAudioSource.Stop();
             gameHasEnded = true;
-            Debug.Log("LOSE LOSE LOSE");
-            Invoke("Restart", restartDelay);
+            Debug.Log("GAME LOST");
+            TextMeshProUGUI losePanelReason = losePanel.transform.Find("TextGameLostReason").GetComponentInChildren<TextMeshProUGUI>();
+            losePanelReason.text = reason;
+            losePanel.SetActive(true);
         }
     }
 
-    private void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-
-
+       
     public void ResetScore()
     {
         score = 0;
@@ -44,13 +48,13 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore()
     {
-        score += 1;
+        score += 10;
         UpdateUIText();
     }
 
     private void UpdateUIText()
     {
-        Score_UIText.text = "Platica: " + score.ToString();
+        Score_UIText.text = score.ToString();
     }
 
 }
