@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  background: #020202;
+  cursor: crosshair;
+}
+#canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.cumple-header {
+  position: absolute;
+  z-index: 1;
+  top: 20%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: #fff;
+}
+.cumple-play-button {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
