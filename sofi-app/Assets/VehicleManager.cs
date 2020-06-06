@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BoatManager : MonoBehaviour
+public class VehicleManager : MonoBehaviour
 {
     public GameObject passenger;
     public float speed = 20f;
+    public bool moveLeft = true;
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;
-    private bool moveLeft = true;
-    //private bool passengerOnBoard = false;
     private Rigidbody2D m_Rigidbody2D;
     private Vector3 m_Velocity = Vector3.zero;
 
@@ -24,7 +21,7 @@ public class BoatManager : MonoBehaviour
         m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
         if (IsPassengerOnBoard())
         {
-            // move the passenger along with the ship
+            // move the passenger along with the vehicle
             CharacterController2D passengerController = passenger.GetComponentInChildren<CharacterController2D>();
             passengerController.SetSupportVelocity(m_Rigidbody2D.velocity);
         }
@@ -48,7 +45,6 @@ public class BoatManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("passenger left the boat ! other=" + other + "; tag=" + other.tag);
             CharacterController2D passengerController = passenger.GetComponentInChildren<CharacterController2D>();
             passengerController.RemoveSupportVelocity();
             passenger = null;
