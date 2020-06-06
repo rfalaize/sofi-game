@@ -1,6 +1,6 @@
 {
     "hosting": {
-        "public": "public",
+        "public": "sofia-web/dist/sofia-web",
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
             {
